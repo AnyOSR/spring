@@ -171,6 +171,7 @@ public class ClassPathMapperScanner extends ClassPathBeanDefinitionScanner {
     return beanDefinitions;
   }
 
+  // 对bean进行处理
   private void processBeanDefinitions(Set<BeanDefinitionHolder> beanDefinitions) {
     GenericBeanDefinition definition;
     for (BeanDefinitionHolder holder : beanDefinitions) {
