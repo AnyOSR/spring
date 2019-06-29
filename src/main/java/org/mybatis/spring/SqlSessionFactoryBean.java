@@ -77,13 +77,13 @@ public class SqlSessionFactoryBean implements FactoryBean<SqlSessionFactory>, In
 
   private static final Log LOGGER = LogFactory.getLog(SqlSessionFactoryBean.class);
 
+  private Configuration configuration;
   private Resource configLocation;
   private Resource[] mapperLocations;
   private DataSource dataSource;
   private Properties configurationProperties;
 
   private TransactionFactory transactionFactory;
-  private Configuration configuration;
   private SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
   private SqlSessionFactory sqlSessionFactory;
 
