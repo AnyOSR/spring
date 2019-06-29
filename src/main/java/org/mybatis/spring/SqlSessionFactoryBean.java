@@ -78,47 +78,30 @@ public class SqlSessionFactoryBean implements FactoryBean<SqlSessionFactory>, In
   private static final Log LOGGER = LogFactory.getLog(SqlSessionFactoryBean.class);
 
   private Resource configLocation;
-
-  private Configuration configuration;
-
   private Resource[] mapperLocations;
-
   private DataSource dataSource;
-
-  private TransactionFactory transactionFactory;
-
   private Properties configurationProperties;
 
+  private TransactionFactory transactionFactory;
+  private Configuration configuration;
   private SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
-
   private SqlSessionFactory sqlSessionFactory;
 
   //EnvironmentAware requires spring 3.1
   private String environment = SqlSessionFactoryBean.class.getSimpleName();
-
   private boolean failFast;
-
   private Interceptor[] plugins;
-
   private TypeHandler<?>[] typeHandlers;
-
   private String typeHandlersPackage;
-
   private Class<?>[] typeAliases;
-
   private String typeAliasesPackage;
-
   private Class<?> typeAliasesSuperType;
 
   //issue #19. No default provider.
   private DatabaseIdProvider databaseIdProvider;
-
   private Class<? extends VFS> vfs;
-
   private Cache cache;
-
   private ObjectFactory objectFactory;
-
   private ObjectWrapperFactory objectWrapperFactory;
 
   /**
