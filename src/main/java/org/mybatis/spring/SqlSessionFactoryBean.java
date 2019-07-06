@@ -378,6 +378,8 @@ public class SqlSessionFactoryBean implements FactoryBean<SqlSessionFactory>, In
     Configuration configuration;
 
     XMLConfigBuilder xmlConfigBuilder = null;
+
+    // 如果configuration存在
     if (this.configuration != null) {
       configuration = this.configuration;
       if (configuration.getVariables() == null) {
@@ -385,7 +387,7 @@ public class SqlSessionFactoryBean implements FactoryBean<SqlSessionFactory>, In
       } else if (this.configurationProperties != null) {
         configuration.getVariables().putAll(this.configurationProperties);
       }
-    } else if (this.configLocation != null) {
+    } else if (this.configLocation != null) {  // 如果configuration不存在，且configLocation存在
       xmlConfigBuilder = new XMLConfigBuilder(this.configLocation.getInputStream(), null, this.configurationProperties);
       configuration = xmlConfigBuilder.getConfiguration();
     } else {
@@ -411,11 +413,9 @@ public class SqlSessionFactoryBean implements FactoryBean<SqlSessionFactory>, In
     }
 
     if (hasLength(this.typeAliasesPackage)) {
-      String[] typeAliasPackageArray = tokenizeToStringArray(this.typeAliasesPackage,
-          ConfigurableApplicationContext.CONFIG_LOCATION_DELIMITERS);
+      String[] typeAliasPackageArray = tokenizeToStringArray(this.typeAliasesPackage, ConfigurableApplicationContext.CONFIG_LOCATION_DELIMITERS);
       for (String packageToScan : typeAliasPackageArray) {
-        configuration.getTypeAliasRegistry().registerAliases(packageToScan,
-                typeAliasesSuperType == null ? Object.class : typeAliasesSuperType);
+        configuration.getTypeAliasRegistry().registerAliases(packageToScan, typeAliasesSuperType == null ? Object.class : typeAliasesSuperType);
         if (LOGGER.isDebugEnabled()) {
           LOGGER.debug("Scanned package: '" + packageToScan + "' for aliases");
         }
