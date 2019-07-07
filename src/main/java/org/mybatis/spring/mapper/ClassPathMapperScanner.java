@@ -185,7 +185,7 @@ public class ClassPathMapperScanner extends ClassPathBeanDefinitionScanner {
       // the mapper interface is the original class of the bean
       // but, the actual class of the bean is MapperFactoryBean
       definition.getConstructorArgumentValues().addGenericArgumentValue(definition.getBeanClassName()); // issue #59
-      definition.setBeanClass(this.mapperFactoryBean.getClass());
+      definition.setBeanClass(this.mapperFactoryBean.getClass());   // 类型设置为mapperFactoryBean
 
       definition.getPropertyValues().add("addToConfig", this.addToConfig);
 
@@ -206,17 +206,18 @@ public class ClassPathMapperScanner extends ClassPathBeanDefinitionScanner {
         explicitFactoryUsed = true;
       } else if (this.sqlSessionTemplate != null) {
         if (explicitFactoryUsed) {
-          logger.warn("Cannot use both: sqlSessionTemplate and sqlSessionFactory together. sqlSessionFactory is ignored.");
+          logger.warn("Cannot use both: sqlSessionTemplate and sqlSessionTemplate together. sqlSessionFactory is ignored.");
         }
         definition.getPropertyValues().add("sqlSessionTemplate", this.sqlSessionTemplate);
         explicitFactoryUsed = true;
       }
 
+      // 如果sqlSessionTemplate和sqlSessionTemplate都没有配置
       if (!explicitFactoryUsed) {
         if (logger.isDebugEnabled()) {
           logger.debug("Enabling autowire by type for MapperFactoryBean with name '" + holder.getBeanName() + "'.");
         }
-        definition.setAutowireMode(AbstractBeanDefinition.AUTOWIRE_BY_TYPE);
+        definition.setAutowireMode(AbstractBeanDefinition.AUTOWIRE_BY_TYPE);  // 则自动按类型装配
       }
     }
   }
