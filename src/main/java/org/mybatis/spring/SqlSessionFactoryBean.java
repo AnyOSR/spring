@@ -412,6 +412,7 @@ public class SqlSessionFactoryBean implements FactoryBean<SqlSessionFactory>, In
       configuration.setVfsImpl(this.vfs);
     }
 
+    // 扫描package，注册alias
     if (hasLength(this.typeAliasesPackage)) {
       String[] typeAliasPackageArray = tokenizeToStringArray(this.typeAliasesPackage, ConfigurableApplicationContext.CONFIG_LOCATION_DELIMITERS);
       for (String packageToScan : typeAliasPackageArray) {
@@ -422,6 +423,7 @@ public class SqlSessionFactoryBean implements FactoryBean<SqlSessionFactory>, In
       }
     }
 
+    //配置了typeAliases
     if (!isEmpty(this.typeAliases)) {
       for (Class<?> typeAlias : this.typeAliases) {
         configuration.getTypeAliasRegistry().registerAlias(typeAlias);
@@ -431,6 +433,7 @@ public class SqlSessionFactoryBean implements FactoryBean<SqlSessionFactory>, In
       }
     }
 
+    // 配置插件
     if (!isEmpty(this.plugins)) {
       for (Interceptor plugin : this.plugins) {
         configuration.addInterceptor(plugin);
@@ -440,9 +443,9 @@ public class SqlSessionFactoryBean implements FactoryBean<SqlSessionFactory>, In
       }
     }
 
+    // 通过package扫描注册typeHandler
     if (hasLength(this.typeHandlersPackage)) {
-      String[] typeHandlersPackageArray = tokenizeToStringArray(this.typeHandlersPackage,
-          ConfigurableApplicationContext.CONFIG_LOCATION_DELIMITERS);
+      String[] typeHandlersPackageArray = tokenizeToStringArray(this.typeHandlersPackage, ConfigurableApplicationContext.CONFIG_LOCATION_DELIMITERS);
       for (String packageToScan : typeHandlersPackageArray) {
         configuration.getTypeHandlerRegistry().register(packageToScan);
         if (LOGGER.isDebugEnabled()) {
@@ -451,6 +454,7 @@ public class SqlSessionFactoryBean implements FactoryBean<SqlSessionFactory>, In
       }
     }
 
+    // 注册配置的typeHandlers
     if (!isEmpty(this.typeHandlers)) {
       for (TypeHandler<?> typeHandler : this.typeHandlers) {
         configuration.getTypeHandlerRegistry().register(typeHandler);
@@ -468,10 +472,12 @@ public class SqlSessionFactoryBean implements FactoryBean<SqlSessionFactory>, In
       }
     }
 
+    // 设置cache
     if (this.cache != null) {
       configuration.addCache(this.cache);
     }
 
+    // 解析configuration配置文件
     if (xmlConfigBuilder != null) {
       try {
         xmlConfigBuilder.parse();
@@ -486,12 +492,14 @@ public class SqlSessionFactoryBean implements FactoryBean<SqlSessionFactory>, In
       }
     }
 
+    //事务管理
     if (this.transactionFactory == null) {
       this.transactionFactory = new SpringManagedTransactionFactory();
     }
 
     configuration.setEnvironment(new Environment(this.environment, this.transactionFactory, this.dataSource));
 
+    //解析mapper
     if (!isEmpty(this.mapperLocations)) {
       for (Resource mapperLocation : this.mapperLocations) {
         if (mapperLocation == null) {
@@ -499,8 +507,7 @@ public class SqlSessionFactoryBean implements FactoryBean<SqlSessionFactory>, In
         }
 
         try {
-          XMLMapperBuilder xmlMapperBuilder = new XMLMapperBuilder(mapperLocation.getInputStream(),
-              configuration, mapperLocation.toString(), configuration.getSqlFragments());
+          XMLMapperBuilder xmlMapperBuilder = new XMLMapperBuilder(mapperLocation.getInputStream(), configuration, mapperLocation.toString(), configuration.getSqlFragments());
           xmlMapperBuilder.parse();
         } catch (Exception e) {
           throw new NestedIOException("Failed to parse mapping resource: '" + mapperLocation + "'", e);
