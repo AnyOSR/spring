@@ -34034,7 +34034,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFroGdZZe7HMaU="
 							},
-							"name": "SqlSession openSession()"
+							"name": "SqlSession openSession()",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -34094,7 +34095,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFroGrgd/oj7sE="
 							},
-							"name": "sqlSessionFactory"
+							"name": "sqlSessionFactory",
+							"type": ""
 						}
 					]
 				},
@@ -34188,7 +34190,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFroG/GVQTNDm0="
 							},
-							"name": "transactionFactory"
+							"name": "transactionFactory",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -34196,7 +34199,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFroG/GVQTNDm0="
 							},
-							"name": "configurationProperties"
+							"name": "configurationProperties",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -34204,7 +34208,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFroG/GVQTNDm0="
 							},
-							"name": "sqlSessionFactoryBuilder"
+							"name": "sqlSessionFactoryBuilder",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -34212,7 +34217,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFroG/GVQTNDm0="
 							},
-							"name": "sqlSessionFactory"
+							"name": "sqlSessionFactory",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -34220,7 +34226,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFroG/GVQTNDm0="
 							},
-							"name": "environment"
+							"name": "environment",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -34228,7 +34235,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFroG/GVQTNDm0="
 							},
-							"name": "failFast"
+							"name": "failFast",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -34236,7 +34244,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFroG/GVQTNDm0="
 							},
-							"name": "plugins"
+							"name": "plugins",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -34244,7 +34253,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFroG/GVQTNDm0="
 							},
-							"name": "typeHandlers"
+							"name": "typeHandlers",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -34252,7 +34262,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFroG/GVQTNDm0="
 							},
-							"name": "typeHandlersPackage"
+							"name": "typeHandlersPackage",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -34260,7 +34271,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFroG/GVQTNDm0="
 							},
-							"name": "typeAliases"
+							"name": "typeAliases",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -34268,7 +34280,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFroG/GVQTNDm0="
 							},
-							"name": "typeAliasesPackage"
+							"name": "typeAliasesPackage",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -34276,7 +34289,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFroG/GVQTNDm0="
 							},
-							"name": "typeAliasesSuperType"
+							"name": "typeAliasesSuperType",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -34284,7 +34298,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFroG/GVQTNDm0="
 							},
-							"name": "databaseIdProvider"
+							"name": "databaseIdProvider",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -34292,7 +34307,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFroG/GVQTNDm0="
 							},
-							"name": "vfs"
+							"name": "vfs",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -34300,7 +34316,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFroG/GVQTNDm0="
 							},
-							"name": "cache"
+							"name": "cache",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -34308,7 +34325,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFroG/GVQTNDm0="
 							},
-							"name": "objectFactory"
+							"name": "objectFactory",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -34316,7 +34334,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFroG/GVQTNDm0="
 							},
-							"name": "objectWrapperFactory"
+							"name": "objectWrapperFactory",
+							"type": ""
 						}
 					]
 				},
