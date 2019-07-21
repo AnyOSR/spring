@@ -104,9 +104,7 @@ public class SqlSessionTemplate implements SqlSession, DisposableBean {
    * @param executorType
    */
   public SqlSessionTemplate(SqlSessionFactory sqlSessionFactory, ExecutorType executorType) {
-    this(sqlSessionFactory, executorType,
-        new MyBatisExceptionTranslator(
-            sqlSessionFactory.getConfiguration().getEnvironment().getDataSource(), true));
+    this(sqlSessionFactory, executorType, new MyBatisExceptionTranslator(sqlSessionFactory.getConfiguration().getEnvironment().getDataSource(), true));
   }
 
   /**
@@ -123,8 +121,7 @@ public class SqlSessionTemplate implements SqlSession, DisposableBean {
    * @param executorType
    * @param exceptionTranslator
    */
-  public SqlSessionTemplate(SqlSessionFactory sqlSessionFactory, ExecutorType executorType,
-      PersistenceExceptionTranslator exceptionTranslator) {
+  public SqlSessionTemplate(SqlSessionFactory sqlSessionFactory, ExecutorType executorType, PersistenceExceptionTranslator exceptionTranslator) {
 
     notNull(sqlSessionFactory, "Property 'sqlSessionFactory' is required");
     notNull(executorType, "Property 'executorType' is required");
