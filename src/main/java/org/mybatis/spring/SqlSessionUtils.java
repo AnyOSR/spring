@@ -86,6 +86,7 @@ public final class SqlSessionUtils {
     notNull(sessionFactory, NO_SQL_SESSION_FACTORY_SPECIFIED);
     notNull(executorType, NO_EXECUTOR_TYPE_SPECIFIED);
 
+    // 从threadLocal里面获取资源(SqlSessionHolder)
     SqlSessionHolder holder = (SqlSessionHolder) TransactionSynchronizationManager.getResource(sessionFactory);
 
     SqlSession session = sessionHolder(executorType, holder);
@@ -97,8 +98,9 @@ public final class SqlSessionUtils {
       LOGGER.debug("Creating a new SqlSession");
     }
 
+    // 未获取到，创建一个新session
     session = sessionFactory.openSession(executorType);
-
+    // 注册一些资源到当前线程
     registerSessionHolder(sessionFactory, executorType, exceptionTranslator, session);
 
     return session;
@@ -120,16 +122,20 @@ public final class SqlSessionUtils {
   private static void registerSessionHolder(SqlSessionFactory sessionFactory, ExecutorType executorType,
       PersistenceExceptionTranslator exceptionTranslator, SqlSession session) {
     SqlSessionHolder holder;
+    // 当前线程的ThreadLocal<Set<TransactionSynchronization>>已设置
     if (TransactionSynchronizationManager.isSynchronizationActive()) {
       Environment environment = sessionFactory.getConfiguration().getEnvironment();
 
+      // 如果是spring管理的
       if (environment.getTransactionFactory() instanceof SpringManagedTransactionFactory) {
         if (LOGGER.isDebugEnabled()) {
           LOGGER.debug("Registering transaction synchronization for SqlSession [" + session + "]");
         }
 
         holder = new SqlSessionHolder(session, executorType, exceptionTranslator);
+        // 绑定资源到当前线程 ThreadLocal<Map<Object, Object>> 以sessionFactory为key，holder为value
         TransactionSynchronizationManager.bindResource(sessionFactory, holder);
+        // 添加到当前线程的ThreadLocal<Set<TransactionSynchronization>>
         TransactionSynchronizationManager.registerSynchronization(new SqlSessionSynchronization(holder, sessionFactory));
         holder.setSynchronizedWithTransaction(true);
         holder.requested();
@@ -152,6 +158,9 @@ public final class SqlSessionUtils {
 
   private static SqlSession sessionHolder(ExecutorType executorType, SqlSessionHolder holder) {
     SqlSession session = null;
+
+    // 如果hold不为null，且必须是SynchronizedWithTransaction
+    // 校验状态
     if (holder != null && holder.isSynchronizedWithTransaction()) {
       if (holder.getExecutorType() != executorType) {
         throw new TransientDataAccessResourceException("Cannot change the ExecutorType when there is an existing transaction");
@@ -205,6 +214,7 @@ public final class SqlSessionUtils {
     notNull(session, NO_SQL_SESSION_SPECIFIED);
     notNull(sessionFactory, NO_SQL_SESSION_FACTORY_SPECIFIED);
 
+    // 获取当前线程上 对应于sessionFactory的SqlSessionHolder
     SqlSessionHolder holder = (SqlSessionHolder) TransactionSynchronizationManager.getResource(sessionFactory);
 
     return (holder != null) && (holder.getSqlSession() == session);
@@ -242,7 +252,7 @@ public final class SqlSessionUtils {
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}   从当前线程移除sessionFactory--holder 但是TransactionSynchronizationManager.synchronizations还是有这个信息的
      */
     @Override
     public void suspend() {
@@ -255,7 +265,7 @@ public final class SqlSessionUtils {
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}    绑定sessionFactory--holder到当前线程
      */
     @Override
     public void resume() {
@@ -268,7 +278,7 @@ public final class SqlSessionUtils {
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritDoc}  尝试commit事务
      */
     @Override
     public void beforeCommit(boolean readOnly) {
