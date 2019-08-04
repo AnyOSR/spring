@@ -2208,11 +2208,30 @@
 									"model": {
 										"$ref": "AAAAAAFsE6YgypgdYw8="
 									},
+									"subViews": [
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFsXCZpoked1ng=",
+											"_parent": {
+												"$ref": "AAAAAAFsE6Ygy5gmcGw="
+											},
+											"model": {
+												"$ref": "AAAAAAFsXCZpbUeay8c="
+											},
+											"font": "Arial;13;0",
+											"left": 1189,
+											"top": 290,
+											"width": 213.79541015625,
+											"height": 13,
+											"text": "+void openConnection()",
+											"horizontalAlignment": 0
+										}
+									],
 									"font": "Arial;13;0",
 									"left": 1184,
 									"top": 285,
 									"width": 223.79541015625,
-									"height": 10
+									"height": 23
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -2250,7 +2269,7 @@
 							"left": 1184,
 							"top": 192,
 							"width": 223.79541015625,
-							"height": 103,
+							"height": 116,
 							"nameCompartment": {
 								"$ref": "AAAAAAFsE6YgypgghnQ="
 							},
@@ -12868,6 +12887,16 @@
 							},
 							"name": "autoCommit",
 							"type": "boolean"
+						}
+					],
+					"operations": [
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFsXCZpbUeay8c=",
+							"_parent": {
+								"$ref": "AAAAAAFsE6YgypgdYw8="
+							},
+							"name": "void openConnection"
 						}
 					]
 				},

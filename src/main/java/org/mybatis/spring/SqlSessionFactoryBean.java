@@ -492,7 +492,7 @@ public class SqlSessionFactoryBean implements FactoryBean<SqlSessionFactory>, In
       }
     }
 
-    //事务管理
+    //事务管理  默认是SpringManagedTransactionFactory
     if (this.transactionFactory == null) {
       this.transactionFactory = new SpringManagedTransactionFactory();
     }
