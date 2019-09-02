@@ -525,11 +525,12 @@ public class SqlSessionFactoryBean implements FactoryBean<SqlSessionFactory>, In
       }
     }
 
+    // 返回了一个SqlSessionFactory
     return this.sqlSessionFactoryBuilder.build(configuration);
   }
 
   /**
-   * {@inheritDoc}
+   * {@inheritDoc}   工厂方法 返回一个SqlSessionFactory  需要SqlSessionFactory的地方都会被注入 这个sqlSessionFactory
    */
   @Override
   public SqlSessionFactory getObject() throws Exception {
