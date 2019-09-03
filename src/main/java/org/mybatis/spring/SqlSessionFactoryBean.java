@@ -532,6 +532,7 @@ public class SqlSessionFactoryBean implements FactoryBean<SqlSessionFactory>, In
   /**
    * {@inheritDoc}   工厂方法 返回一个SqlSessionFactory  需要SqlSessionFactory的地方都会被注入 这个sqlSessionFactory
    */
+  // 而mapper对应的class MapperFactoryBean里面恰好有一个setSqlSessionFactory方法
   @Override
   public SqlSessionFactory getObject() throws Exception {
     if (this.sqlSessionFactory == null) {
